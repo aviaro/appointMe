@@ -13,21 +13,25 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-
+//protect the sent data using csurf
 const csrfProtection = csrf();
+// body parsing
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+//for time and date management
 app.locals.moment = require('moment');
+// public dirctory for css, etc ,what is required for the page to function
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static('images'));
-
+// session  collection for connection history
 const mongo_uri = 'mongodb+srv://avi:zJz1EvYqz8LZQCAf@cluster0.oroi0.mongodb.net/appointmedb?retryWrites=true&w=majority';
 const store = new MongoDBStore({
     uri: mongo_uri,
     collection: 'sessions'
 });
+// Initialization of session
 app.use(session({
     secret: '8EP8ojnX3yrcSb1ry185mNZYGSKe3oL8',
     resave: false,
