@@ -6,7 +6,7 @@ const serviceSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
     storeid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "store"
+        ref: "Store"
     },
     service_provider: String,
     service_name: String,
